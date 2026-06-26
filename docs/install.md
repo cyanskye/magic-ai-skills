@@ -2,6 +2,12 @@
 
 ## 安装本仓库 Skills
 
+仓库源：
+
+`git@github.com:cyanskye/magic-ai-skills.git`
+
+如果平台支持从 GitHub 仓库安装，就让它从这个仓库读取 Skills。
+
 ### Codex
 
 ```bash

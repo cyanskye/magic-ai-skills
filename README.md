@@ -11,6 +11,12 @@
 - `请安装 magic-recorder 技能`
 - `请安装 magic-kb-compiler 技能`
 
+仓库源地址：
+
+- `git@github.com:cyanskye/magic-ai-skills.git`
+
+如果你的 Agent 支持从 GitHub 仓库安装，就直接指向这个仓库。
+
 ```bash
 # Codex
 mkdir -p ~/.codex/skills
