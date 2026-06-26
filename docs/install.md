@@ -39,7 +39,12 @@ skills/magic-kb-compiler
 
 本仓库不安装也不复制 Get 笔记官方 Skill。
 
-如果要让 `magic-recorder` 或 `magic-kb-compiler` 读取 Get 笔记，请按官方页面配置：
+如果要让 `magic-recorder` 或 `magic-kb-compiler` 读取 Get 笔记，先按官方页面安装和授权官方 Skill：
+
+- 安装提示词：`请安装得到大脑技能，帮我记录和查找笔记。技能地址：https://clawhub.ai/iswalle/getnote`
+- 授权提示词：`请帮我授权得到大脑`
+
+官方文档：
 
 - https://www.biji.com/openapi?tab=docs
 - https://www.biji.com/openapi?tab=skill
@@ -53,6 +58,13 @@ GETNOTE_OWNER_ID=... # optional
 ```
 
 不要把真实 `.env`、token、cookie 或私密笔记内容提交到这个仓库。
+
+## Get 笔记常用使用提示词
+
+- `帮我记录一下：...`
+- `帮我查找关于 XXX 的笔记`
+- `帮我整理这条记录`
+- `帮我把这段内容归档到笔记里`
 
 ## 知识库目标平台
 

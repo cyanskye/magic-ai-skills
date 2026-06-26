@@ -11,6 +11,11 @@
 - `请安装 magic-recorder 技能`
 - `请安装 magic-kb-compiler 技能`
 
+如果你要接入 Get 笔记官方技能，可以直接说：
+
+- `请安装得到大脑技能，帮我记录和查找笔记。技能地址：https://clawhub.ai/iswalle/getnote`
+- `请帮我授权得到大脑`
+
 仓库源地址：
 
 - `git@github.com:cyanskye/magic-ai-skills.git`
@@ -36,6 +41,12 @@ cp -R skills/magic-kb-compiler ~/.claude/skills/
 - `请使用 magic-recorder，把这段口述整理成 Markdown。`
 - `请使用 magic-kb-compiler，把这份材料编译成 Obsidian 知识卡。`
 - `请使用 magic-kb-compiler，把这份材料编译成 ima 可导入的知识包。`
+
+如果你是在调用 Get 笔记官方技能，可以直接说：
+
+- `帮我记录一下：...`
+- `帮我查找关于 XXX 的笔记`
+- `帮我整理这条记录`
 
 ## 当前包含
 
