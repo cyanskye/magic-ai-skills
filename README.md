@@ -8,14 +8,14 @@ AI Skills · SKILL
 
 ## 安装提示词
 
-发给支持 GitHub / Skill 安装的 Agent：
+这几个 Skill 各自独立，**一句话安装**——把下面这段发给支持 GitHub / Skill 安装的 Agent（Codex、Claude 等），它会自己拉取并装到对应 `skills` 目录：
 
 ```text
 请从 GitHub 私有仓库安装 Magic AI Skills。
 
 仓库地址：git@github.com:cyanskye/magic-ai-skills.git
 
-只安装这三个自制 Skills：
+安装这些自制 Skills（也可只装其中一个，按需点名）：
 - skills/magic-recorder
 - skills/magic-kb-compiler
 - skills/magic-wechat
@@ -23,21 +23,9 @@ AI Skills · SKILL
 不要安装 getnote、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
 ```
 
-前提：当前环境必须有这个私有仓库的 GitHub 访问权限。
+只装单个时，把列表换成你要的那一个即可，例如「只安装 skills/magic-wechat」。
 
-如果平台不能从 GitHub 自动安装，就手动复制对应目录：
-
-```bash
-git clone git@github.com:cyanskye/magic-ai-skills.git
-cd magic-ai-skills
-
-mkdir -p ~/.codex/skills
-cp -R skills/magic-recorder ~/.codex/skills/
-cp -R skills/magic-kb-compiler ~/.codex/skills/
-cp -R skills/magic-wechat ~/.codex/skills/
-```
-
-Claude 等其他 Agent，把目录复制到它自己的 `skills` 目录即可。
+前提：当前环境有这个私有仓库的 GitHub 访问权限。
 
 ## 使用提示词
 
