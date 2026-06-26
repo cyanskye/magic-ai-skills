@@ -15,7 +15,17 @@
 | `magic-kb-compiler` | Get 笔记官方 OpenAPI / Skill | external service | optional | 当输入来源是 Get 笔记时使用 |
 | `magic-kb-compiler` | Obsidian / Magic AI 知识库 | local workspace | target mode | 当前最完整的本地落地目标，支持 raw、cards、wiki、views 和 logs |
 | `magic-kb-compiler` | ima | knowledge platform | target mode | 可作为知识库目标平台，适合导入整理后的 Markdown、知识条目或文档包 |
-| `magic-kb-compiler` | 其他知识库 / 文档平台 | knowledge platform | target mode | 需要按平台导入能力补适配说明 |
+
+## 运行环境兼容
+
+| 环境 | 兼容方式 | 说明 |
+| --- | --- | --- |
+| Codex | native/local skills | 直接使用本地 `skills/` 目录 |
+| Claude | native/local skills | 直接使用本地 `skills/` 目录 |
+| ima | rule source + target platform | 可读取规则，也可作为知识库目标 |
+| WorkBuddy | rule source | 读取 `SKILL.md` 后按平台能力执行 |
+| OpenClaw | rule source | 读取 `SKILL.md` 后按平台能力执行 |
+| Hermes | rule source | 读取 `SKILL.md` 后按平台能力执行 |
 
 ## Mermaid 图
 
@@ -25,7 +35,7 @@ flowchart TD
   compiler[magic-kb-compiler]
   getnote[Get note OpenAPI / official Skill]
   obsidian[Obsidian / Magic AI 知识库]
-  ima[ima / other knowledge platforms]
+  ima[ima]
   markdown[Local Markdown workspace]
 
   recorder -. optional input .-> getnote

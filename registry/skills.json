@@ -64,19 +64,38 @@
           "type": "knowledge platform",
           "required": false,
           "mode": "target",
-          "maturity": "adapter-needed",
-          "when": "Can be used as a knowledge-base target by exporting Markdown, knowledge entries, or import packages."
-        },
-        {
-          "name": "Other knowledge or document platforms",
-          "type": "knowledge platform",
-          "required": false,
-          "mode": "target",
-          "maturity": "adapter-needed",
-          "when": "Can be supported when the platform import format, API, or manual import workflow is specified."
+          "maturity": "export-package",
+          "when": "Used as a knowledge-base target by exporting Markdown, source summaries, topic entries, or import packages."
         }
       ],
+      "target_platforms": ["obsidian", "ima"],
       "source_path": "/Users/magicsang666/.codex/skills/magic-kb-compiler"
+    }
+  ],
+  "runtime_compatibility": [
+    {
+      "name": "Codex",
+      "mode": "native/local skills"
+    },
+    {
+      "name": "Claude",
+      "mode": "native/local skills"
+    },
+    {
+      "name": "ima",
+      "mode": "rule source and target platform"
+    },
+    {
+      "name": "WorkBuddy",
+      "mode": "rule source"
+    },
+    {
+      "name": "OpenClaw",
+      "mode": "rule source"
+    },
+    {
+      "name": "Hermes",
+      "mode": "rule source"
     }
   ],
   "excluded": [

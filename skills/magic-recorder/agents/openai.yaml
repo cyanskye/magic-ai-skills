@@ -1,4 +1,4 @@
 interface:
   display_name: "Magic Recorder"
-  short_description: "把口述想法整理成个人 Markdown 思考记录稿"
-  default_prompt: "Use $magic-recorder to turn my spoken notes into a structured Markdown thinking record."
+  short_description: "Turn spoken notes into portable Markdown records"
+  default_prompt: "Use $magic-recorder to turn my spoken notes into a structured portable Markdown record."

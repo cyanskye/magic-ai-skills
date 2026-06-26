@@ -7,7 +7,7 @@
 | Skill | 用途 | 外部依赖 |
 | --- | --- | --- |
 | `magic-recorder` | 把口述、粗糙转写、Get 笔记材料整理成结构化 Markdown 思考记录 | Get 笔记官方能力（输入源，可选）、本地 Markdown 工作区（输出目标，可选） |
-| `magic-kb-compiler` | 把语音笔记、Get 笔记、剪藏、AI 对话和松散想法编译成可迁移的知识资产 | Get 笔记官方能力（输入源，可选）、Obsidian / ima 等知识库目标平台 |
+| `magic-kb-compiler` | 把语音笔记、Get 笔记、剪藏、AI 对话和松散想法编译成可迁移的知识资产 | Get 笔记官方能力（输入源，可选）、Obsidian / ima 目标知识库 |
 
 ## 这个仓库不包含什么
 
@@ -30,7 +30,29 @@
 2. `magic-kb-compiler`：把原始材料编译成知识资产，包括 raw、cards、wiki、views、logs、导入包或平台发布稿。
 3. Get 笔记：是外部输入源。接入方式参考 Get 笔记官方 OpenAPI 文档和官方 Skill 页。
 4. Obsidian：是当前成熟的本地落地目标，适合保留 raw、schema、cards、wiki、views 和 logs。
-5. ima 等知识库平台：可以作为目标平台，但需要对应的导入/发布适配，例如 Markdown 包、文档包、链接包或平台 API/官方导入能力。
+5. ima：是当前兼容的知识库目标，优先输出可导入的 Markdown 知识包、主题条目和来源摘要。只有实际调用平台 API 或完成导入后，才说明已经写入 ima。
+
+## 运行环境兼容
+
+这些 Skills 尽量保持为普通 `SKILL.md` 规则和本机文件/命令约定，不绑定某一个 Agent 产品。
+
+当前目标运行环境：
+
+- Codex
+- Claude
+- ima
+- WorkBuddy
+- OpenClaw
+- Hermes
+
+兼容原则：
+
+- Skill 本体只依赖 Markdown 指令、相对路径和可选脚本。
+- 平台私有能力只写成可选能力，不写成默认必需条件。
+- 如果某个平台不能直接安装 Skills，先把本仓库当作规则源，让该平台读取对应 `SKILL.md`。
+- 不在仓库中保存任何平台 token、cookie、`.env` 或私密知识库内容。
+
+详细说明见 [docs/runtime-compatibility.md](docs/runtime-compatibility.md)。
 
 ## 外部依赖
 
@@ -47,15 +69,16 @@
 
 ### 知识库目标平台
 
-`magic-kb-compiler` 默认面向本地 Obsidian vault 中的 `magic-ai-kb`，因为这个目标最适合保存 raw、schema、cards、wiki、views 和 logs。
+`magic-kb-compiler` 支持两个目标知识库：
 
-但它不应该被写死为只能支持 Obsidian。ima、其他知识库、文档库、网盘或团队知识空间都可以成为目标平台。区别只是落地格式不同：
+- Obsidian / Magic AI 知识库
+- ima
 
-- Obsidian：保留完整文件结构和可追溯日志。
-- ima：更适合导入整理后的 Markdown / 文档包 / 知识条目。
-- 其他平台：根据平台支持的导入方式，输出对应格式。
+Obsidian 是当前最完整的本地实现，适合保存 raw、schema、cards、wiki、views 和 logs。
 
-如果目标平台不是 Obsidian，需要补一个目标适配说明：输出目录结构、导入格式、是否保留 raw、是否写 compile log、如何处理增量更新和去重。
+ima 模式不照搬 Obsidian 文件结构，默认生成平台友好的 Markdown 导入包、主题知识条目和来源摘要。
+
+如果用户没有指定目标平台，优先使用 Obsidian；如果本机没有可用的 `magic-ai-kb`，输出 ima/Markdown 导入包，并明确说明尚未写入任何平台。
 
 ## 依赖关系
 
@@ -78,7 +101,7 @@ cp -R skills/magic-recorder ~/.codex/skills/
 cp -R skills/magic-kb-compiler ~/.codex/skills/
 ```
 
-Get 笔记接入请单独按官方说明配置。目标知识库可以是 Obsidian、ima 或其他平台；当前最完整的落地规则是 Obsidian / Magic AI 知识库模式。
+Get 笔记接入请单独按官方说明配置。目标知识库当前只承诺兼容 Obsidian 和 ima。
 
 ## 维护规则
 

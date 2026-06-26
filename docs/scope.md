@@ -29,3 +29,20 @@
 
 外部服务只写依赖说明，不复制服务方 Skill。
 
+## 兼容范围
+
+知识库目标当前只兼容：
+
+- Obsidian / Magic AI 知识库
+- ima
+
+运行环境尽量兼容：
+
+- Codex
+- Claude
+- ima
+- WorkBuddy
+- OpenClaw
+- Hermes
+
+兼容的含义是：这些环境可以读取或迁移本仓库的 `SKILL.md` 规则；不是承诺每个平台都已有自动安装、自动导入或 API 写入能力。

@@ -1,13 +1,13 @@
 ---
 name: magic-kb-compiler
-description: Use when the user wants to compile voice notes, Get notes, clippings, AI chat records, loose thoughts, AI practice notes, workflows, or tutorial material into reusable Magic AI knowledge assets for Obsidian, ima, or another knowledge platform.
+description: Use when the user wants to compile voice notes, Get notes, clippings, AI chat records, loose thoughts, AI practice notes, workflows, or tutorial material into reusable Magic AI knowledge assets for Obsidian / Magic AI 知识库 or ima.
 ---
 
 # Magic KB Compiler
 
 ## Overview
 
-Compile raw inputs into the user's local Magic AI 知识库. The goal is not neutral summarization; it is to turn scattered material into reusable knowledge assets, output directions, recommended questions, methods, and future AI context.
+Compile raw inputs into reusable Magic AI knowledge assets. The goal is not neutral summarization; it is to turn scattered material into reusable knowledge assets, output directions, recommended questions, methods, and future AI context.
 
 The primary quick-reading unit is the atomic card in `cards/`, not a whole article, whole Get note, or whole wiki page. `brief-cards/` is optional theme-level overview material; it is not the default speed-reading layer.
 
@@ -33,8 +33,11 @@ This skill compiles raw material into reusable knowledge assets. Do not treat on
 Supported target modes:
 
 - **Obsidian / Magic AI 知识库 mode**: current most complete local-first mode. Use this when the user wants raw files, schema-driven cards, wiki pages, views, and compile logs.
-- **ima / knowledge-platform mode**: supported as an export/import target. Use this when the user wants material prepared for ima or a similar knowledge base. Generate Markdown documents, topic entries, source summaries, and import packages instead of assuming Obsidian's folder structure exists.
-- **Generic document/knowledge platform mode**: supported when the target platform's import format, API, or manual workflow is known.
+- **ima mode**: supported as an export/import target. Use this when the user wants material prepared for ima. Generate Markdown documents, topic entries, source summaries, and import packages instead of assuming Obsidian's folder structure exists.
+
+If the user specifies `target_platform`, accept only `obsidian` or `ima`. If the user does not specify a target, default to Obsidian when a usable `magic-ai-kb` exists; otherwise generate an ima-ready Markdown import package and state that no platform was written.
+
+For detailed target behavior, read `references/target-platforms.md` when choosing or implementing a target adapter.
 
 ### Obsidian / Magic AI 知识库 Mode
 
@@ -48,9 +51,9 @@ Default knowledge base:
 
 If the user provides another vault or `magic-ai-kb` path, use that path for the current task.
 
-### ima / Knowledge-Platform Mode
+### ima Mode
 
-When the target is ima or another hosted knowledge platform:
+When the target is ima:
 
 1. Do not require the Obsidian `schema/`, `cards/`, `wiki/`, `views/`, or `logs/` folders to exist.
 2. Ask or infer the platform import shape:
@@ -79,7 +82,7 @@ For Obsidian / Magic AI 知识库 mode, before compiling anything, read these fi
 
 If any file is missing, recreate the missing file only after telling the user what is missing.
 
-For ima / knowledge-platform mode, read the target adapter instructions if present. If no adapter exists yet, produce a clear export package and document the import assumptions.
+For ima mode, read `references/target-platforms.md`. Produce a clear export package and document the import assumptions unless an actual ima upload/import path is available and verified.
 
 ## Workflow
 
@@ -106,7 +109,8 @@ When the user gives a Get笔记 share URL such as `https://d.biji.com/...` and a
    - Folder of pending raw notes
 
 2. Preserve the raw input:
-   - Save new raw material under the appropriate `raw/` subfolder.
+   - Obsidian mode: save new raw material under the appropriate `raw/` subfolder.
+   - ima mode: include the source text or a source summary in the import package unless the user asks to omit raw material.
    - Do not overwrite or edit raw source files.
    - If the input is already in the vault, reference it instead of duplicating unless the user asks to copy it.
 
@@ -164,6 +168,15 @@ After compiling, report:
 
 Keep the reply concise and include clickable local file links.
 
+## Runtime Portability
+
+This skill should stay portable across Codex, Claude, ima, WorkBuddy, OpenClaw, and Hermes:
+
+- Keep the core workflow in `SKILL.md` and target details in `references/`.
+- Do not require a platform-specific API unless the current task explicitly uses it.
+- If the runtime cannot write files or run scripts, produce a Markdown package and clear manual import steps.
+- Do not claim a target platform was updated unless the write/import action was actually performed and verified.
+
 ## Non-Goals
 
-Do not implement multi-platform distribution, full automation, visual apps, Hermes integration, or large migrations unless the user explicitly asks. Put these into `views/backlog.md` when they arise.
+Do not implement full automation, visual apps, provider-specific plugin migrations, or large migrations unless the user explicitly asks. Put these into `views/backlog.md` when they arise.

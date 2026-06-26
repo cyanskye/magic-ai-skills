@@ -120,3 +120,12 @@ Do not force this exact outline. Choose headings from the user's content.
 - "我先随便说，你帮我沉淀成一篇 Markdown。"
 - "这是一段语音转文字，帮我整理成个人思考记录。"
 - "以后我想复用这个口述整理工作流。"
+
+## Runtime Portability
+
+This skill should stay portable across Codex, Claude, ima, WorkBuddy, OpenClaw, and Hermes:
+
+- Treat `SKILL.md` as the source of truth.
+- Use platform-specific Get笔记 or file tools only when available.
+- If the runtime cannot write local files, return the Markdown record and suggested filename.
+- Do not require any platform token, cookie, or private API by default.
