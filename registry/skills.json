@@ -107,7 +107,13 @@
       "target_platforms": [
         "claude"
       ],
-      "source_path": "/Users/magicsang666/.claude/skills/magic-wechat"
+      "source_path": "/Users/magicsang666/.claude/skills/magic-wechat",
+      "derived_from": {
+        "name": "baoyu-post-to-wechat",
+        "author": "宝玉 (Baoyu)",
+        "location": "~/.claude/skills/baoyu-post-to-wechat",
+        "note": "公众号发布思路来源；本 skill 的 publish.py 为自建实现（微信官方 draft/add API），不含原 skill 源码。"
+      }
     }
   ],
   "runtime_compatibility": [

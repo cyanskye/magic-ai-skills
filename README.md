@@ -4,7 +4,7 @@ AI Skills · SKILL
 
 装一次，多平台复用。
 
-把我自制的 Magic AI 工作流 Skills 接入你正在使用的 Agent 平台。一句话触发口述整理、知识编译，并按 Obsidian 或 ima 输出。
+把我自制的 Magic AI 工作流 Skills 接入你正在使用的 Agent 平台。一句话触发口述整理、知识编译、公众号发布，并按 Obsidian / ima / 微信草稿输出。
 
 ## 安装提示词
 
@@ -15,9 +15,10 @@ AI Skills · SKILL
 
 仓库地址：git@github.com:cyanskye/magic-ai-skills.git
 
-只安装这两个自制 Skills：
+只安装这三个自制 Skills：
 - skills/magic-recorder
 - skills/magic-kb-compiler
+- skills/magic-wechat
 
 不要安装 getnote、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
 ```
@@ -33,6 +34,7 @@ cd magic-ai-skills
 mkdir -p ~/.codex/skills
 cp -R skills/magic-recorder ~/.codex/skills/
 cp -R skills/magic-kb-compiler ~/.codex/skills/
+cp -R skills/magic-wechat ~/.codex/skills/
 ```
 
 Claude 等其他 Agent，把目录复制到它自己的 `skills` 目录即可。
@@ -67,12 +69,20 @@ Claude 等其他 Agent，把目录复制到它自己的 `skills` 目录即可。
 如果依赖外部输入源，请先说明依赖关系。
 ```
 
+发布公众号文章：
+
+```text
+请使用 magic-wechat，把这篇 Markdown 整理成公众号草稿：
+套用固定排版、本地生成纯文字封面、存到草稿箱（不直接群发）。
+```
+
 ## 当前包含
 
 | Skill | 作用 | 主要依赖 |
 | --- | --- | --- |
 | `magic-recorder` | 把口述、粗糙转写、Get 笔记材料整理成结构化 Markdown 思考记录 | Get 笔记官方能力（可选）、本地 Markdown 工作区（可选） |
 | `magic-kb-compiler` | 把语音笔记、Get 笔记、剪藏、AI 对话和松散想法编译成可迁移的知识资产 | Get 笔记官方能力（可选）、Obsidian / ima |
+| `magic-wechat` | 把 Markdown 文章套固定排版、本地出纯文字封面（可商用字体）、一键存公众号草稿 | 微信公众号官方 API、Pillow + 阿里普惠体；思路源自宝玉 `baoyu-post-to-wechat`（见「来源标注」） |
 
 ## 适用场景
 
@@ -98,6 +108,12 @@ Obsidian 和 ima 是 `magic-kb-compiler` 当前明确支持的目标知识库：
 - 外部服务配套 Skills
 - 历史版本
 - 真实 token、cookie、`.env`、私密笔记内容
+
+## 来源标注
+
+规矩：**凡是从他人 Skill 衍生或运行时依赖的，都在此标注原 Skill 的位置/来源。**
+
+- `magic-wechat`：公众号发布的整套思路源自**宝玉 `baoyu-post-to-wechat`**（宝玉 Skills 系列，安装于 `~/.claude/skills/baoyu-post-to-wechat`）。本仓库的 `scripts/publish.py` 为自建实现，直调微信官方 `draft/add` API，**不含宝玉源码**；排版样式取自神奇桑桑本人公众号文章。
 
 ## 详细文档
 
