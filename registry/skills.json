@@ -2,7 +2,7 @@
   "repository": "magic-ai-skills",
   "visibility": "private",
   "scope": "personal stable skills only",
-  "updated_at": "2026-06-26",
+  "updated_at": "2026-06-27",
   "license": null,
   "history_policy": "current stable version only",
   "skills": [
@@ -68,8 +68,46 @@
           "when": "Used as a knowledge-base target by exporting Markdown, source summaries, topic entries, or import packages."
         }
       ],
-      "target_platforms": ["obsidian", "ima"],
+      "target_platforms": [
+        "obsidian",
+        "ima"
+      ],
       "source_path": "/Users/magicsang666/.codex/skills/magic-kb-compiler"
+    },
+    {
+      "name": "magic-wechat",
+      "path": "skills/magic-wechat",
+      "status": "stable",
+      "ownership": "personal",
+      "purpose": "Publish 神奇桑桑's WeChat Official Account articles: fixed layout (profile card + orange section dividers + fixed footer), local pure-text cover with a commercial-safe font (2.35:1, compatible with 1:1 Moments crop), and save a draft with auto-settable options (comments on / fans-only comments / source URL).",
+      "internal_dependencies": [],
+      "external_dependencies": [
+        {
+          "name": "WeChat Official Account API (draft/add, material/add_material)",
+          "type": "external service",
+          "required": true,
+          "when": "Upload cover and save article draft.",
+          "docs": [
+            "https://developers.weixin.qq.com/doc/offiaccount/Draft_Box/Add_draft.html"
+          ]
+        },
+        {
+          "name": "Alibaba PuHuiTi font (commercial-free)",
+          "type": "local asset",
+          "required": true,
+          "when": "Rendering the text cover in build_cover.py."
+        },
+        {
+          "name": "Pillow (Python)",
+          "type": "python package",
+          "required": true,
+          "when": "Local cover drawing."
+        }
+      ],
+      "target_platforms": [
+        "claude"
+      ],
+      "source_path": "/Users/magicsang666/.claude/skills/magic-wechat"
     }
   ],
   "runtime_compatibility": [
