@@ -1,52 +1,71 @@
 # magic-ai-skills
 
-这是我的私有 Skills 仓库，只保留我自己创建并稳定使用的两个 Skill。
+AI Skills · SKILL
 
-## 一句话安装
+装一次，多平台复用。
 
-把需要的 Skill 目录放进你当前 Agent 的 `skills` 目录。
+把我自制的 Magic AI 工作流 Skills 接入你正在使用的 Agent 平台。一句话触发口述整理、知识编译，并按 Obsidian 或 ima 输出。
 
-如果你的 Agent 支持自然语言安装，可以直接说：
+## 安装提示词
 
-- `请安装 magic-recorder 技能`
-- `请安装 magic-kb-compiler 技能`
+发给支持 GitHub / Skill 安装的 Agent：
 
-如果你要接入 Get 笔记官方技能，可以直接说：
+```text
+请从 GitHub 私有仓库安装 Magic AI Skills。
 
-- `请安装得到大脑技能，帮我记录和查找笔记。技能地址：https://clawhub.ai/iswalle/getnote`
-- `请帮我授权得到大脑`
+仓库地址：git@github.com:cyanskye/magic-ai-skills.git
 
-仓库源地址：
+只安装这两个自制 Skills：
+- skills/magic-recorder
+- skills/magic-kb-compiler
 
-- `git@github.com:cyanskye/magic-ai-skills.git`
+不要安装 getnote、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
+```
 
-如果你的 Agent 支持从 GitHub 仓库安装，就直接指向这个仓库。
+前提：当前环境必须有这个私有仓库的 GitHub 访问权限。
+
+如果平台不能从 GitHub 自动安装，就手动复制对应目录：
 
 ```bash
-# Codex
+git clone git@github.com:cyanskye/magic-ai-skills.git
+cd magic-ai-skills
+
 mkdir -p ~/.codex/skills
 cp -R skills/magic-recorder ~/.codex/skills/
 cp -R skills/magic-kb-compiler ~/.codex/skills/
-
-# Claude
-mkdir -p ~/.claude/skills
-cp -R skills/magic-recorder ~/.claude/skills/
-cp -R skills/magic-kb-compiler ~/.claude/skills/
 ```
 
-只装一个也可以，直接复制对应目录即可。
+Claude 等其他 Agent，把目录复制到它自己的 `skills` 目录即可。
 
-## 一句话调用
+## 使用提示词
 
-- `请使用 magic-recorder，把这段口述整理成 Markdown。`
-- `请使用 magic-kb-compiler，把这份材料编译成 Obsidian 知识卡。`
-- `请使用 magic-kb-compiler，把这份材料编译成 ima 可导入的知识包。`
+整理口述或粗糙转写：
 
-如果你是在调用 Get 笔记官方技能，可以直接说：
+```text
+请使用 magic-recorder，把下面这段口述整理成个人 Markdown 思考记录：
+...
+```
 
-- `帮我记录一下：...`
-- `帮我查找关于 XXX 的笔记`
-- `帮我整理这条记录`
+编译到 Obsidian / Magic AI 知识库：
+
+```text
+请使用 magic-kb-compiler，把这份材料编译成 Obsidian 知识资产。
+目标知识库路径是：...
+```
+
+导出给 ima：
+
+```text
+请使用 magic-kb-compiler，把这份材料整理成 ima 可导入的 Markdown 知识包。
+不要写入 Obsidian，保留来源、摘要、主题和导入说明。
+```
+
+不确定目标平台时：
+
+```text
+请使用 magic-kb-compiler，先判断这份材料应该写入 Obsidian 还是导出 ima 知识包。
+如果依赖外部输入源，请先说明依赖关系。
+```
 
 ## 当前包含
 
@@ -55,7 +74,23 @@ cp -R skills/magic-kb-compiler ~/.claude/skills/
 | `magic-recorder` | 把口述、粗糙转写、Get 笔记材料整理成结构化 Markdown 思考记录 | Get 笔记官方能力（可选）、本地 Markdown 工作区（可选） |
 | `magic-kb-compiler` | 把语音笔记、Get 笔记、剪藏、AI 对话和松散想法编译成可迁移的知识资产 | Get 笔记官方能力（可选）、Obsidian / ima |
 
-## 这仓库不放什么
+## 适用场景
+
+- 日常记录：口述、转写稿、临时想法、Get 笔记内容整理成个人 Markdown。
+- 知识编译：把原始材料拆成 cards、wiki、views、logs 等可追踪知识资产。
+- 平台迁移：把同一套知识资产输出给 Obsidian 或 ima。
+- Agent 复用：让 Codex、Claude、ima、WorkBuddy、OpenClaw、Hermes 等环境读取同一套 `SKILL.md` 规则。
+
+## 依赖边界
+
+`getnote` 不在本仓库里。它是 Get 笔记官方 OpenAPI / 官方 Skill / 外部服务适配层，只作为可选输入源。
+
+Obsidian 和 ima 是 `magic-kb-compiler` 当前明确支持的目标知识库：
+
+- Obsidian：完整本地知识库模式，支持 raw、cards、wiki、views、logs。
+- ima：导入包模式，输出 Markdown 知识包和导入说明。
+
+## 不收录
 
 - 第三方或他人创建的 Skills
 - 系统内置 Skills
@@ -64,33 +99,10 @@ cp -R skills/magic-kb-compiler ~/.claude/skills/
 - 历史版本
 - 真实 token、cookie、`.env`、私密笔记内容
 
-`getnote` 不在仓库内。它属于 Get 笔记官方 OpenAPI / 官方 Skill / 外部服务适配层。
-
-## 兼容范围
-
-运行环境：Codex、Claude、ima、WorkBuddy、OpenClaw、Hermes。
-
-目标知识库：Obsidian、ima。
-
-这表示这些环境可以读取或迁移本仓库的 `SKILL.md` 规则，不表示每个平台都内置自动安装、API 写入或导入能力。
-
-详细说明见：
+## 详细文档
 
 - [docs/install.md](docs/install.md)
 - [docs/runtime-compatibility.md](docs/runtime-compatibility.md)
 - [docs/external-dependencies.md](docs/external-dependencies.md)
-
-## 依赖关系
-
-详细依赖见：
-
 - [registry/dependencies.md](registry/dependencies.md)
 - [registry/skills.json](registry/skills.json)
-- [registry/dependency-graph.mmd](registry/dependency-graph.mmd)
-
-## 维护规则
-
-- 只收录我自己创建和维护的 Skill。
-- 依赖外部服务或官方 Skill 时，只在 registry 和说明里注明，不复制外部 Skill。
-- 依赖 Obsidian、本地 vault 或其他工作区时，要明确写出目标路径和边界。
-- 提交前扫描敏感信息和无关依赖目录。

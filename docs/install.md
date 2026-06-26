@@ -1,16 +1,43 @@
 # 安装说明
 
-## 安装本仓库 Skills
+## 安装源
 
-仓库源：
+GitHub 私有仓库：
 
-`git@github.com:cyanskye/magic-ai-skills.git`
+```text
+git@github.com:cyanskye/magic-ai-skills.git
+```
 
-如果平台支持从 GitHub 仓库安装，就让它从这个仓库读取 Skills。
+安装前提：
+
+- 当前机器或 Agent 已有这个私有仓库的 GitHub 访问权限。
+- 只安装 `skills/magic-recorder` 和 `skills/magic-kb-compiler`。
+- 不安装 `getnote`、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
+
+## 推荐安装提示词
+
+发给支持 GitHub / Skill 安装的 Agent：
+
+```text
+请从 GitHub 私有仓库安装 Magic AI Skills。
+
+仓库地址：git@github.com:cyanskye/magic-ai-skills.git
+
+只安装这两个自制 Skills：
+- skills/magic-recorder
+- skills/magic-kb-compiler
+
+不要安装 getnote、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
+```
+
+## 手动安装
 
 ### Codex
 
 ```bash
+git clone git@github.com:cyanskye/magic-ai-skills.git
+cd magic-ai-skills
+
 mkdir -p ~/.codex/skills
 cp -R skills/magic-recorder ~/.codex/skills/
 cp -R skills/magic-kb-compiler ~/.codex/skills/
@@ -19,6 +46,9 @@ cp -R skills/magic-kb-compiler ~/.codex/skills/
 ### Claude
 
 ```bash
+git clone git@github.com:cyanskye/magic-ai-skills.git
+cd magic-ai-skills
+
 mkdir -p ~/.claude/skills
 cp -R skills/magic-recorder ~/.claude/skills/
 cp -R skills/magic-kb-compiler ~/.claude/skills/
@@ -33,23 +63,63 @@ skills/magic-recorder
 skills/magic-kb-compiler
 ```
 
-如果平台没有原生 Skills 目录，就把本仓库当作规则源，让 Agent 读取对应 `SKILL.md`。详细边界见 [runtime-compatibility.md](runtime-compatibility.md)。
+如果平台没有原生 Skills 目录，就把本仓库当作规则源，让 Agent 读取对应 `SKILL.md`。
+
+## 使用提示词
+
+### magic-recorder
+
+```text
+请使用 magic-recorder，把下面这段口述整理成个人 Markdown 思考记录：
+...
+```
+
+适合：
+
+- 口述整理
+- 语音转写稿整理
+- Get 笔记内容整理
+- 粗糙想法沉淀成 Markdown
+
+### magic-kb-compiler 写入 Obsidian
+
+```text
+请使用 magic-kb-compiler，把这份材料编译成 Obsidian 知识资产。
+目标知识库路径是：...
+```
+
+适合输出：
+
+- `raw/` 原始材料
+- `cards/` 原子卡片
+- `wiki/` 主题页面
+- `views/` 问题池、选题池、待办视图
+- `logs/` 编译日志
+
+### magic-kb-compiler 导出给 ima
+
+```text
+请使用 magic-kb-compiler，把这份材料整理成 ima 可导入的 Markdown 知识包。
+不要写入 Obsidian，保留来源、摘要、主题和导入说明。
+```
+
+适合输出：
+
+- Markdown 文档
+- 分主题知识条目
+- 来源摘要
+- 导入说明
 
 ## Get 笔记接入
 
 本仓库不安装也不复制 Get 笔记官方 Skill。
 
-如果要让 `magic-recorder` 或 `magic-kb-compiler` 读取 Get 笔记，先按官方页面安装和授权官方 Skill：
-
-- 安装提示词：`请安装得到大脑技能，帮我记录和查找笔记。技能地址：https://clawhub.ai/iswalle/getnote`
-- 授权提示词：`请帮我授权得到大脑`
-
-官方文档：
+Get 笔记在这里只是可选输入源。需要读取 Get 笔记时，按官方文档配置外部能力：
 
 - https://www.biji.com/openapi?tab=docs
 - https://www.biji.com/openapi?tab=skill
 
-常见需要准备的配置包括：
+常见配置包括：
 
 ```bash
 GETNOTE_API_KEY=...
@@ -58,13 +128,6 @@ GETNOTE_OWNER_ID=... # optional
 ```
 
 不要把真实 `.env`、token、cookie 或私密笔记内容提交到这个仓库。
-
-## Get 笔记常用使用提示词
-
-- `帮我记录一下：...`
-- `帮我查找关于 XXX 的笔记`
-- `帮我整理这条记录`
-- `帮我把这段内容归档到笔记里`
 
 ## 知识库目标平台
 
@@ -85,16 +148,16 @@ magic-ai-kb/
   logs/
 ```
 
-如果你的 vault 路径变化，请在使用 Skill 时明确告诉 Agent 当前 `magic-ai-kb` 路径。
+如果 vault 路径变化，请在使用 Skill 时明确告诉 Agent 当前 `magic-ai-kb` 路径。
 
 ### ima 模式
 
-ima 可以作为目标，但不要直接套用 Obsidian 的文件结构。
+ima 是导入包目标，不直接套用 Obsidian 的文件结构。
 
-使用这类平台时，应先明确：
+使用 ima 模式时，Skill 应输出平台友好的 Markdown 知识包，并明确：
 
-- ima 支持导入什么格式：Markdown、PDF、docx、网页链接、文件夹、API。
-- 是否需要保留 raw 原文。
-- 是否需要输出 cards/wiki/views/logs，还是合并成平台友好的知识条目。
-- 增量更新如何处理：覆盖、追加、版本化，还是人工确认后导入。
-- 是否需要单独的发布脚本或手动导入说明。
+- 来源材料
+- 摘要
+- 主题条目
+- 导入方式
+- 是否保留 raw 原文
