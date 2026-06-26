@@ -1,0 +1,72 @@
+{
+  "repository": "magic-ai-skills",
+  "visibility": "private",
+  "scope": "personal stable skills only",
+  "updated_at": "2026-06-26",
+  "license": null,
+  "history_policy": "current stable version only",
+  "skills": [
+    {
+      "name": "getnote",
+      "path": "skills/getnote",
+      "status": "stable",
+      "ownership": "personal",
+      "purpose": "Read, search, save, and manage Get note content; provide Get note material to Magic AI workflows.",
+      "internal_dependencies": [],
+      "external_dependencies": [
+        {
+          "name": "Get note OpenAPI",
+          "type": "service",
+          "required_env": ["GETNOTE_API_KEY", "GETNOTE_CLIENT_ID"],
+          "optional_env": ["GETNOTE_OWNER_ID"]
+        }
+      ],
+      "source_path": "/Users/magicsang666/.codex/skills/getnote"
+    },
+    {
+      "name": "magic-recorder",
+      "path": "skills/magic-recorder",
+      "status": "stable",
+      "ownership": "personal",
+      "purpose": "Turn rough spoken notes, transcripts, and Get note records into structured Markdown thinking records.",
+      "internal_dependencies": [
+        {
+          "name": "getnote",
+          "required": false,
+          "when": "Used when input comes from a Get note link, latest note request, note id, title, date, or keyword."
+        }
+      ],
+      "external_dependencies": [],
+      "source_path": "/Users/magicsang666/.codex/skills/magic-recorder"
+    },
+    {
+      "name": "magic-kb-compiler",
+      "path": "skills/magic-kb-compiler",
+      "status": "stable",
+      "ownership": "personal",
+      "purpose": "Compile raw notes, Get notes, clippings, AI chat records, and practice notes into Magic AI knowledge assets.",
+      "internal_dependencies": [
+        {
+          "name": "getnote",
+          "required": false,
+          "when": "Used when the source is a Get note share URL or private Get note record."
+        }
+      ],
+      "external_dependencies": [
+        {
+          "name": "Magic AI knowledge base",
+          "type": "local workspace",
+          "required": true
+        }
+      ],
+      "source_path": "/Users/magicsang666/.codex/skills/magic-kb-compiler"
+    }
+  ],
+  "excluded": [
+    "third-party or other-author skills",
+    "system skills",
+    "plugin cache skills",
+    "external service companion skills",
+    "historical versions"
+  ]
+}

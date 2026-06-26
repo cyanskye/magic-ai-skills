@@ -1,0 +1,12 @@
+flowchart TD
+  getnote[getnote]
+  recorder[magic-recorder]
+  compiler[magic-kb-compiler]
+  api[Get note OpenAPI]
+  kb[Magic AI 知识库]
+
+  recorder -. optional .-> getnote
+  compiler -. optional .-> getnote
+  getnote --> api
+  compiler --> kb
+
