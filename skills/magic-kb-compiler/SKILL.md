@@ -1,6 +1,6 @@
 ---
 name: magic-kb-compiler
-description: Use when the user wants to compile voice notes, Get notes, clippings, AI chat records, loose thoughts, AI practice notes, workflows, or tutorial material into the Magic AI 知识库 / magic-ai-kb Obsidian knowledge base.
+description: Use when the user wants to compile voice notes, Get notes, clippings, AI chat records, loose thoughts, AI practice notes, workflows, or tutorial material into reusable Magic AI knowledge assets for Obsidian, ima, or another knowledge platform.
 ---
 
 # Magic KB Compiler
@@ -26,9 +26,19 @@ When generating cards, topic pools, recommended questions, context packs, prompt
 
 The target is high-quality trust and useful judgment, not low-value follower growth.
 
-## Knowledge Base Location
+## Target Platforms
 
-Default vault root:
+This skill compiles raw material into reusable knowledge assets. Do not treat one storage platform as the whole skill.
+
+Supported target modes:
+
+- **Obsidian / Magic AI 知识库 mode**: current most complete local-first mode. Use this when the user wants raw files, schema-driven cards, wiki pages, views, and compile logs.
+- **ima / knowledge-platform mode**: supported as an export/import target. Use this when the user wants material prepared for ima or a similar knowledge base. Generate Markdown documents, topic entries, source summaries, and import packages instead of assuming Obsidian's folder structure exists.
+- **Generic document/knowledge platform mode**: supported when the target platform's import format, API, or manual workflow is known.
+
+### Obsidian / Magic AI 知识库 Mode
+
+Default vault root for the user's local Obsidian setup:
 
 `/Users/magicsang666/Library/Mobile Documents/iCloud~md~obsidian/Documents/MacbookAir`
 
@@ -38,9 +48,28 @@ Default knowledge base:
 
 If the user provides another vault or `magic-ai-kb` path, use that path for the current task.
 
+### ima / Knowledge-Platform Mode
+
+When the target is ima or another hosted knowledge platform:
+
+1. Do not require the Obsidian `schema/`, `cards/`, `wiki/`, `views/`, or `logs/` folders to exist.
+2. Ask or infer the platform import shape:
+   - Markdown document
+   - Folder of Markdown files
+   - PDF/docx export
+   - Web link/import package
+   - API-backed upload
+3. Preserve provenance in the exported content:
+   - source title or note id
+   - original source type
+   - capture/compile date
+   - short summary
+   - key topics/tags
+4. Prefer a staged output package first. Do not claim the platform has been updated unless an actual upload/import action was performed and verified.
+
 ## Required Reading
 
-Before compiling anything, read these files from `magic-ai-kb`:
+For Obsidian / Magic AI 知识库 mode, before compiling anything, read these files from `magic-ai-kb`:
 
 1. `00-index.md`
 2. `schema/mvp-definition.md`
@@ -50,20 +79,22 @@ Before compiling anything, read these files from `magic-ai-kb`:
 
 If any file is missing, recreate the missing file only after telling the user what is missing.
 
+For ima / knowledge-platform mode, read the target adapter instructions if present. If no adapter exists yet, produce a clear export package and document the import assumptions.
+
 ## Workflow
 
 ### One-Line Get Note Mode
 
 When the user gives a Get笔记 share URL such as `https://d.biji.com/...` and asks to compile it, do not ask the user to export anything manually.
 
-1. Use the `getnote` skill first.
-2. Fetch shared notes with the nearest available `getnote/scripts/fetch_shared_note.py`.
+1. Use the external Get笔记 official Skill / OpenAPI ability when available. This repository does not bundle the Get笔记 Skill.
+2. Fetch shared notes with the nearest available compatible `getnote/scripts/fetch_shared_note.py` if it exists locally.
    Prefer these locations in order:
    - The current agent's local skill directory.
    - `/Users/magicsang666/.agents/skills/getnote/scripts/fetch_shared_note.py`
    - `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_shared_note.py`
    - `/Users/magicsang666/.claude/skills/getnote/scripts/fetch_shared_note.py`
-3. Only use a browser as a last-resort fallback if the script cannot fetch the note.
+3. Only use a browser as a last-resort fallback if the official/API/script path cannot fetch the note.
 4. Then continue the normal compile workflow below.
 
 1. Identify the input source:

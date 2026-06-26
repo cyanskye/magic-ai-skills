@@ -1,12 +1,13 @@
 flowchart TD
-  getnote[getnote]
   recorder[magic-recorder]
   compiler[magic-kb-compiler]
-  api[Get note OpenAPI]
-  kb[Magic AI 知识库]
+  getnote[Get note OpenAPI / official Skill]
+  obsidian[Obsidian / Magic AI 知识库]
+  ima[ima / other knowledge platforms]
+  markdown[Local Markdown workspace]
 
-  recorder -. optional .-> getnote
-  compiler -. optional .-> getnote
-  getnote --> api
-  compiler --> kb
-
+  recorder -. optional input .-> getnote
+  recorder -. optional output .-> markdown
+  compiler -. optional input .-> getnote
+  compiler --> obsidian
+  compiler -. target adapter .-> ima

@@ -7,36 +7,30 @@
   "history_policy": "current stable version only",
   "skills": [
     {
-      "name": "getnote",
-      "path": "skills/getnote",
-      "status": "stable",
-      "ownership": "personal",
-      "purpose": "Read, search, save, and manage Get note content; provide Get note material to Magic AI workflows.",
-      "internal_dependencies": [],
-      "external_dependencies": [
-        {
-          "name": "Get note OpenAPI",
-          "type": "service",
-          "required_env": ["GETNOTE_API_KEY", "GETNOTE_CLIENT_ID"],
-          "optional_env": ["GETNOTE_OWNER_ID"]
-        }
-      ],
-      "source_path": "/Users/magicsang666/.codex/skills/getnote"
-    },
-    {
       "name": "magic-recorder",
       "path": "skills/magic-recorder",
       "status": "stable",
       "ownership": "personal",
-      "purpose": "Turn rough spoken notes, transcripts, and Get note records into structured Markdown thinking records.",
-      "internal_dependencies": [
+      "purpose": "Turn rough spoken notes, transcripts, and Get note materials into structured Markdown thinking records.",
+      "internal_dependencies": [],
+      "external_dependencies": [
         {
-          "name": "getnote",
+          "name": "Get note OpenAPI / official Skill",
+          "type": "external service",
           "required": false,
-          "when": "Used when input comes from a Get note link, latest note request, note id, title, date, or keyword."
+          "when": "Used when input comes from a Get note link, latest note request, note id, title, date, or keyword.",
+          "docs": [
+            "https://www.biji.com/openapi?tab=docs",
+            "https://www.biji.com/openapi?tab=skill"
+          ]
+        },
+        {
+          "name": "Local Markdown workspace",
+          "type": "local filesystem",
+          "required": false,
+          "when": "Used when saving the cleaned thinking record."
         }
       ],
-      "external_dependencies": [],
       "source_path": "/Users/magicsang666/.codex/skills/magic-recorder"
     },
     {
@@ -45,24 +39,48 @@
       "status": "stable",
       "ownership": "personal",
       "purpose": "Compile raw notes, Get notes, clippings, AI chat records, and practice notes into Magic AI knowledge assets.",
-      "internal_dependencies": [
-        {
-          "name": "getnote",
-          "required": false,
-          "when": "Used when the source is a Get note share URL or private Get note record."
-        }
-      ],
+      "internal_dependencies": [],
       "external_dependencies": [
         {
-          "name": "Magic AI knowledge base",
+          "name": "Get note OpenAPI / official Skill",
+          "type": "external service",
+          "required": false,
+          "when": "Used when the source is a Get note share URL or private Get note record.",
+          "docs": [
+            "https://www.biji.com/openapi?tab=docs",
+            "https://www.biji.com/openapi?tab=skill"
+          ]
+        },
+        {
+          "name": "Obsidian / Magic AI knowledge base",
           "type": "local workspace",
-          "required": true
+          "required": false,
+          "mode": "target",
+          "maturity": "stable",
+          "when": "Used as the full local target for raw sources, cards, wiki pages, views, and compile logs."
+        },
+        {
+          "name": "ima",
+          "type": "knowledge platform",
+          "required": false,
+          "mode": "target",
+          "maturity": "adapter-needed",
+          "when": "Can be used as a knowledge-base target by exporting Markdown, knowledge entries, or import packages."
+        },
+        {
+          "name": "Other knowledge or document platforms",
+          "type": "knowledge platform",
+          "required": false,
+          "mode": "target",
+          "maturity": "adapter-needed",
+          "when": "Can be supported when the platform import format, API, or manual import workflow is specified."
         }
       ],
       "source_path": "/Users/magicsang666/.codex/skills/magic-kb-compiler"
     }
   ],
   "excluded": [
+    "Get note official skill or OpenAPI adapter",
     "third-party or other-author skills",
     "system skills",
     "plugin cache skills",

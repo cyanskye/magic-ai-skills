@@ -24,14 +24,14 @@ Transform rough spoken thinking into a readable personal record without changing
 Before asking the user for more material, decide which input mode applies:
 
 - **Pasted long text / transcript**: If the user gives a substantial block of text, treat it as the source material and start the recorder workflow directly. Do not ask whether it came from Get笔记.
-- **Get笔记 share link**: If the user gives a link such as `https://d.biji.com/...`, load the `getnote` skill and fetch it with `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_shared_note.py`.
-- **Implicit Get笔记 request**: If the user asks to record/整理/沉淀/编译 but provides no text, file, or link, assume the intended source is the newest Get笔记 record. Load the `getnote` skill and run `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_note.py --latest`.
-- **Direct Get笔记 request**: If the user says “读取 Get 笔记”, “读最新 Get 笔记”, “最新的 Get 笔记记录”, or similar without a link, load the `getnote` skill and run `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_note.py --latest`.
-- **Specified Get笔记 request**: If the user names a note title, note id, date, or keyword, load the `getnote` skill and run `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_note.py --query "..."` or `--id ...`. If multiple notes are plausible and the wrong choice would be risky, ask one concise clarification.
+- **Get笔记 share link**: If the user gives a link such as `https://d.biji.com/...`, use the external Get笔记 official Skill / OpenAPI ability when available. This repository does not bundle the Get笔记 Skill. In the user's local environment, a compatible script may exist at `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_shared_note.py`.
+- **Implicit Get笔记 request**: If the user asks to record/整理/沉淀/编译 but provides no text, file, or link, assume the intended source is the newest Get笔记 record. Use the external Get笔记 official Skill / OpenAPI ability when available. In the user's local environment, a compatible script may exist at `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_note.py --latest`.
+- **Direct Get笔记 request**: If the user says “读取 Get 笔记”, “读最新 Get 笔记”, “最新的 Get 笔记记录”, or similar without a link, use the external Get笔记 official Skill / OpenAPI ability when available.
+- **Specified Get笔记 request**: If the user names a note title, note id, date, or keyword, use the external Get笔记 official Skill / OpenAPI ability with query/id lookup. If multiple notes are plausible and the wrong choice would be risky, ask one concise clarification.
 - **File path**: If the user references a local file, read that file and use it as the source.
 - **No usable source**: Only ask for the transcript or source when there is no pasted text, no file, no Get笔记 link, and no clear request to fetch Get笔记.
 
-For private Get笔记 API access, load credentials from `/Users/magicsang666/.getnote/.env` when environment variables are absent. Do not print credentials.
+For private Get笔记 API access, follow the official OpenAPI / Skill setup. Environment variables such as `GETNOTE_API_KEY`, `GETNOTE_CLIENT_ID`, and optional `GETNOTE_OWNER_ID` may be required. Do not print credentials.
 
 For Get笔记 detail records:
 
@@ -45,7 +45,7 @@ For Get笔记 detail records:
 1. Identify the user's raw material:
    - If the user pasted a transcript, use it directly.
    - If the user references a file, read that file.
-   - If the user provides a Get笔记 shared link such as `https://d.biji.com/...`, also load the `getnote` skill and fetch it with `/Users/magicsang666/.codex/skills/getnote/scripts/fetch_shared_note.py`.
+   - If the user provides a Get笔记 shared link such as `https://d.biji.com/...`, use the external Get笔记 official Skill / OpenAPI ability when available. This repository does not bundle that Skill.
    - If the user asks to read Get笔记 without a link, use the Input Routing rules above instead of asking the user to paste or export the note.
    - For fetched Get笔记 audio notes, use `audio.original` or `original.c.content` as the primary transcript and use polished/list content only as a readability aid; do not let the polished version add claims absent from the original.
    - If the user asks to "record this" but provides no content, ask for the transcript or source.

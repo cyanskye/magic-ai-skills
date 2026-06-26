@@ -1,4 +1,0 @@
-interface:
-  display_name: "Get笔记"
-  short_description: "Read and save Get笔记 notes"
-  default_prompt: "Use $getnote to read this Get笔记 note and import it into Magic AI 知识库。"

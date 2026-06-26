@@ -4,12 +4,12 @@
 
 ## 当前收录
 
-- `getnote`
 - `magic-recorder`
 - `magic-kb-compiler`
 
 ## 不收录
 
+- Get 笔记官方 Skill 或 Get 笔记 OpenAPI 适配层
 - 第三方 Skills
 - 系统内置 Skills
 - 插件缓存 Skills
@@ -21,9 +21,11 @@
 
 一个 Skill 进入本仓库，需要同时满足：
 
-1. 是自己创建或长期维护的工作流。
+1. 是自己创建或长期维护的 Magic AI 工作流。
 2. 当前版本稳定可用。
-3. 与 Magic AI 工作流直接相关。
+3. 与 Magic AI 记录、整理、知识库编译直接相关。
 4. 依赖关系清楚。
 5. 不包含真实凭据或私密内容。
+
+外部服务只写依赖说明，不复制服务方 Skill。
 
