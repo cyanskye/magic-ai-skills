@@ -2,7 +2,7 @@
 
 ## 安装源
 
-GitHub 私有仓库：
+GitHub 仓库：
 
 ```text
 git@github.com:cyanskye/magic-ai-skills.git
@@ -10,7 +10,7 @@ git@github.com:cyanskye/magic-ai-skills.git
 
 安装前提：
 
-- 当前机器或 Agent 已有这个私有仓库的 GitHub 访问权限。
+- 当前机器或 Agent 已有这个仓库的 GitHub 访问权限。
 - 只安装 `skills/magic-recorder` 和 `skills/magic-kb-compiler`。
 - 不安装 `getnote`、系统 Skills、插件缓存 Skills、第三方 Skills 或历史版本。
 
@@ -19,7 +19,7 @@ git@github.com:cyanskye/magic-ai-skills.git
 发给支持 GitHub / Skill 安装的 Agent：
 
 ```text
-请从 GitHub 私有仓库安装 Magic AI Skills。
+请从 GitHub 仓库安装 Magic AI Skills。
 
 仓库地址：git@github.com:cyanskye/magic-ai-skills.git
 

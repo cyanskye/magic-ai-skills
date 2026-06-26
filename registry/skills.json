@@ -1,6 +1,6 @@
 {
   "repository": "magic-ai-skills",
-  "visibility": "private",
+  "visibility": "public",
   "scope": "personal stable skills only",
   "updated_at": "2026-06-27",
   "license": null,
